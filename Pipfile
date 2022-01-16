@@ -1,0 +1,37 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = {extras = ["all"], version = "*"}
+uvicorn = {extras = ["standard"], version = "*"}
+fastapi-health = "*"
+loguru = "*"
+sqlmodel = "*"
+python-jose = {extras = ["cryptography"], version = "*"}
+passlib = {extras = ["bcrypt"], version = "*"}
+password-strength = "*"
+
+[dev-packages]
+black = "*"
+flake8 = "*"
+mypy = "*"
+ipython = "*"
+pytest = "*"
+pytest-cov = "*"
+
+[requires]
+python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
+
+[scripts]
+shell = "ipython"
+flake8 = "flake8 --max-line-length=120 --max-complexity=15 fast_users_service/"
+mypy = "python -m mypy fast_users_service/"
+service = "python -m fast_users_service.main"
+black = "python -m black --fast fast_users_service/ tests/"
+tests = "python -m pytest --cov=fast_users_service tests/"
+pre = "${SHELL} -c 'pipenv run black && pipenv run flake8 && pipenv run mypy && pipenv run tests'"

@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.flake8
+.pylintrc
+mypy.ini
+.vscode/
+.gitignore
+.git
+.tool-versions
+docs/
+tests/
+README.md
+requirements-dev.txt
+.coverage
+.db
