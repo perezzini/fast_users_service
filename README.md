@@ -1,1 +1,3 @@
-# fast_users_service
+# fastUSERS service
+
+Work in progress
