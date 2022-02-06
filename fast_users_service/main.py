@@ -9,12 +9,16 @@ from fast_users_service.api.users import create_admin
 from fast_users_service.config import CONFIG
 from fast_users_service.db.engine import create_db_and_tables
 from fast_users_service.logger import configure
+from fast_users_service.middleware import configure_cors
 
 APP = FastAPI(title="FastCRUD API")
 
 
 @APP.on_event("startup")
 def startup() -> None:
+    logger.info("Cofiguring CORS middleware...")
+    configure_cors(APP)
+
     logger.info("Creating DB and tables...")
     create_db_and_tables()
 

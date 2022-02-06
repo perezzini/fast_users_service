@@ -4,12 +4,13 @@ from fastapi import Depends
 from fast_users_service.api.rest.enums import DBStatus
 from fast_users_service.config import CONFIG
 from fast_users_service.db import models  # noqa
-from sqlmodel import Session, SQLModel, create_engine
+from sqlmodel import Session, SQLModel, create_engine, select
 
+# NOTE: "echo" param must be set to False when in production mode
 ENGINE = create_engine(
     CONFIG["db"]["url"],
     echo=not CONFIG["service"]["prod_mode"],
-    connect_args={"check_same_thread": False},
+    # connect_args={"check_same_thread": False},  # NOTE: only works in SQLite
 )
 
 
@@ -22,7 +23,7 @@ def get_session() -> Iterator[Session]:
         yield session
 
 
-def is_db_online(session: Session = Depends(get_session)) -> Dict[str, Any]:
+def is_db_healthy(session: Session = Depends(get_session)) -> Dict[str, Any]:
     """Database health check status
 
     Args:
@@ -31,7 +32,7 @@ def is_db_online(session: Session = Depends(get_session)) -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: Health check result
     """
-    if session.is_active:
-        return {"db_status": DBStatus.active}
+    stmt = select(1)  # NOTE: trivial
+    result = session.exec(stmt)
 
-    return {"db_status": DBStatus.inactive}
+    return {"db_status": DBStatus.active if result else DBStatus.inactive}

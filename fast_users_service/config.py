@@ -4,12 +4,11 @@ from typing import Any, Dict
 
 CONFIG: Dict[str, Any] = {
     "service": {
-        "token_url": "/fast-crud/auth/token",
+        "token_url": "/fast-users/auth/token",
         "prod_mode": strtobool(os.getenv("PROD_MODE", "False")),
     },
     "db": {
-        "file_name": os.environ["DATABASE_FILE_NAME"],
-        "url": f"sqlite:///{os.environ['DATABASE_FILE_NAME']}",
+        "url": f"postgresql://{os.environ['POSTGRES_USERNAME']}:{os.environ['POSTGRES_PSW']}@{os.environ['POSTGRES_SERVER']}:{os.getenv('POSTGRES_PORT', '5432')}/oracle",  # noqa
     },
     "security": {
         "jwt": {

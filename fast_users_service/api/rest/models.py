@@ -1,14 +1,10 @@
 from typing import Optional
 
 from fast_users_service.api.rest.enums import (
-    Camera,
-    Computer,
     DBStatus,
-    DeviceDeliveryType,
-    DeviceState,
     TokenType,
 )
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 
 
 class Token(BaseModel):
@@ -21,14 +17,6 @@ class TokenData(BaseModel):
     id: str = Field(description="User ID")
     expires_at: Optional[int] = Field(description="Token expires at")
     iat: int = Field(description="Token issued at")
-
-
-class ImageRes(BaseModel):
-    height: int
-    width: int
-
-    def __str__(self) -> str:
-        return f"({str(self.height)}, {str(self.width)})"
 
 
 class HealthResponse(BaseModel):
