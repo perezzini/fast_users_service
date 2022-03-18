@@ -8,7 +8,7 @@ CONFIG: Dict[str, Any] = {
         "prod_mode": strtobool(os.getenv("PROD_MODE", "False")),
     },
     "db": {
-        "url": f"postgresql://{os.environ['POSTGRES_USERNAME']}:{os.environ['POSTGRES_PSW']}@{os.environ['POSTGRES_SERVER']}:{os.getenv('POSTGRES_PORT', '5432')}/oracle",  # noqa
+        "url": f"postgresql://{os.environ['POSTGRES_USERNAME']}:{os.environ['POSTGRES_PSW']}@{os.environ['POSTGRES_SERVER']}:{os.getenv('POSTGRES_PORT', '5432')}/users",  # noqa
     },
     "security": {
         "jwt": {
