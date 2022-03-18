@@ -11,7 +11,7 @@ from fast_users_service.db.engine import create_db_and_tables
 from fast_users_service.logger import configure
 from fast_users_service.middleware import configure_cors
 
-APP = FastAPI(title="FastCRUD API")
+APP = FastAPI(title="FastUSERS API")
 
 
 @APP.on_event("startup")
